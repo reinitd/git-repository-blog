@@ -1,11 +1,10 @@
 {
   "repository": {
-    "link": "https://github.com/octocat/example",
+    "host": "github",
+    "repository": "qaezz/example",
     "branch": "main"
   },
   "paths": {
-    "posts_json": "data/posts.json",
-    "comments_json": "data/comments.json",
-    "likes_json": "data/likes.json"
+    "posts_json": "data/blog.json"
   }
 }
