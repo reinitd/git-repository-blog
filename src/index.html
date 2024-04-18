@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body style="background-color:#101010; color:white;">
     <style>
         .grb-post {
@@ -14,28 +17,63 @@
             display: flex;
             flex-direction: column;
         }
-        .grb-post-title {
+
+        .grb-post-header {
+            display: inline-flex;
             border-bottom: 1px solid grey;
             padding-bottom: 5px;
+            justify-content: space-between;
+        }
+        .grb-post-title {
             color: white;
             font-weight: bold;
             text-decoration: none;
         }
+
         .grb-post-uid {
             color: rgba(200, 200, 200, .75);
             margin: 0;
             margin-top: 5px;
-            align-self: end;
+            align-self: top;
             font-size: small;
         }
+
         .grb-post-content {
-            margin: 0;
-            margin: 5px 0 5px 0;
+            margin: 10px 0 0 0;
         }
+        .grb-post-author-avatar {
+            aspect-ratio: 1/1;
+            width: 50px;
+            filter: invert(1);
+        }
+
+        .grb-stats {
+            display: inline-flex;
+            margin: 10px 0 0 0;
+            padding: 5px 0 0 0;
+            gap: 20px;
+            border-top: 1px solid grey;
+        }
+        .grb-stats span {
+            display: inline-flex;
+            align-items: center;
+            gap: 2.5px;
+            margin-bottom: 0;
+        }
+        .grb-stats span p {
+            margin: 0;
+        }
+        /* .grb-stats .grb-likes {
+            display: inline-flex;
+        }
+        .grb-stats .grb-shares {
+            display: inline-flex;
+        } */
     </style>
     <p>hello</p>
     <div id="blog-posts"></div>
 
     <script src="./gitRepoBlog.js"></script>
 </body>
+
 </html>

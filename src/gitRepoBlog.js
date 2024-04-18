@@ -55,31 +55,63 @@ function defaultLoadPosts(parentElementId) {
         var postDiv = document.createElement('div');
         postDiv.classList.add('grb-post');
 
+        var headerSpan = document.createElement('span');
+        headerSpan.classList.add('grb-post-header');
+
         var titleLink = document.createElement('a');
         titleLink.href = post.titleLink;
         titleLink.target = "_blank";
         titleLink.classList.add("grb-post-title");
         titleLink.textContent = post.title;
 
-        var postContent = document.createElement('p');
-        postContent.classList.add("grb-post-content");
-        postContent.textContent = post.content.replace("<!--start-edited-tag-->", "").replace("<!--end-edited-tag-->", "");
+        var postInfoDiv = document.createElement('div');
+        postInfoDiv.classList.add('grb-post-info');
+        var authorAvatar = document.createElement('img');
+        authorAvatar.classList.add('grb-post-author-avatar');
+        authorAvatar.setAttribute("src", post.author_avatar);
+
+        // TODO: add vertical next to avatar:
+        // TODO:                title - date
+        // TODO:                author name
+
+        postInfoDiv.appendChild(authorAvatar);
 
         var uidPortion = document.createElement('p');
         uidPortion.classList.add("grb-post-uid");
         uidPortion.textContent = `\nPost UID: ${post.uid}`;
 
+        var postContent = document.createElement('p');
+        postContent.classList.add("grb-post-content");
+        postContent.textContent = post.content.replace("<!--start-edited-tag-->", "").replace("<!--end-edited-tag-->", "");
+
         var postStats = document.createElement('span');
         postStats.classList.add("grb-stats");
-        postStats.appendChild(
-            document.createElement('p').textContent = post.likes
-        );
-        postStats.appendChild(
-            document.createElement('p').textContent = post.shares
-        ); // TODO: fix
 
-        postDiv.appendChild(titleLink);
-        postDiv.appendChild(uidPortion);
+        var likeSpan = document.createElement('span');
+        likeSpan.classList.add('grb-likes');
+        var likeIcon = document.createElement('i');
+        likeIcon.className = "bx bx-like"; // <i class='bx bx-like'></i>
+        var likes = document.createElement('p');
+        likes.textContent = post.likes;
+        likeSpan.appendChild(likeIcon);
+        likeSpan.appendChild(likes);
+
+        var shareSpan = document.createElement('span');
+        shareSpan.classList.add('grb-shares');
+        var shareIcon = document.createElement('i');
+        shareIcon.className = "bx bx-share"; // <i class='bx bx-share'></i>
+        var shares = document.createElement('p')
+        shares.textContent = post.shares;
+        shareSpan.appendChild(shareIcon);
+        shareSpan.appendChild(shares);
+
+        postStats.appendChild(likeSpan);
+        postStats.appendChild(shareSpan);
+
+        headerSpan.appendChild(postInfoDiv);
+        headerSpan.appendChild(uidPortion);
+
+        postDiv.appendChild(headerSpan);
         postDiv.appendChild(postContent);
         postDiv.appendChild(postStats);
         // TODO: make a builder
