@@ -10,6 +10,11 @@ var postData_url;
 
 var postData;
 
+// https://stackoverflow.com/a/54524040/14363702
+function unixToNormal(unixTimestamp) {
+    return new Date(unixTimestamp * 1000).toISOString().slice(0, 19).replace('T', ' ')
+}
+
 function checkUrl(string) {
     let givenURL;
     try {
@@ -62,7 +67,7 @@ function defaultLoadPosts(parentElementId) {
         titleLink.href = post.titleLink;
         titleLink.target = "_blank";
         titleLink.classList.add("grb-post-title");
-        titleLink.textContent = post.title;
+        titleLink.textContent = `${post.author} • ${post.title}`;
 
         var postInfoDiv = document.createElement('div');
         postInfoDiv.classList.add('grb-post-info');
@@ -70,11 +75,18 @@ function defaultLoadPosts(parentElementId) {
         authorAvatar.classList.add('grb-post-author-avatar');
         authorAvatar.setAttribute("src", post.author_avatar);
 
-        // TODO: add vertical next to avatar:
-        // TODO:                title - date
-        // TODO:                author name
+        var postDetailsDiv = document.createElement('div');
+        postDetailsDiv.classList.add('grb-post-details');
+
+        var postCreationDate = document.createElement('p');
+        postCreationDate.classList.add('grb-post-creation-date');
+        postCreationDate.textContent = unixToNormal(post.creation_timestamp);
+        
+        postDetailsDiv.appendChild(titleLink);
+        postDetailsDiv.appendChild(postCreationDate);
 
         postInfoDiv.appendChild(authorAvatar);
+        postInfoDiv.appendChild(postDetailsDiv);
 
         var uidPortion = document.createElement('p');
         uidPortion.classList.add("grb-post-uid");
@@ -82,10 +94,9 @@ function defaultLoadPosts(parentElementId) {
 
         var postContent = document.createElement('p');
         postContent.classList.add("grb-post-content");
-        postContent.textContent = post.content.replace("<!--start-edited-tag-->", "").replace("<!--end-edited-tag-->", "");
-
+        postContent.textContent = post.content;
         var postStats = document.createElement('span');
-        postStats.classList.add("grb-stats");
+        postStats.classList.add("grb-post-stats");
 
         var likeSpan = document.createElement('span');
         likeSpan.classList.add('grb-likes');
@@ -112,6 +123,12 @@ function defaultLoadPosts(parentElementId) {
         headerSpan.appendChild(uidPortion);
 
         postDiv.appendChild(headerSpan);
+        if (post.edited_timestamp != null) {
+            var editedTimestamp = document.createElement('p');
+            editedTimestamp.classList.add('grb-post-edited-timestamp');
+            editedTimestamp.textContent = `Edited on: ${unixToNormal(post.edited_timestamp)}`;
+            postDiv.appendChild(editedTimestamp);
+        }
         postDiv.appendChild(postContent);
         postDiv.appendChild(postStats);
         // TODO: make a builder
@@ -122,6 +139,20 @@ function defaultLoadPosts(parentElementId) {
         } else {
             parentElement.appendChild(postDiv);
         }
+
+        if (post.comments.length > 0) {
+            var commentDetails = document.createElement('details');
+            var commentSummary = document.createElement('summary');
+            commentSummary.classList.add('grb-post-summary');
+            commentSummary.textContent = 'Click to View Comments';
+            
+            commentDetails.appendChild(commentSummary);
+            
+            var commentTextNode = document.createTextNode('Comments here.');
+            commentDetails.appendChild(commentTextNode);
+        
+            postDiv.appendChild(commentDetails);
+        }        
 
         var timeTaken = Date.now() - start;
         console.log("Posts loaded in: " + timeTaken + " milliseconds");

@@ -16,6 +16,7 @@
             padding: 5px;
             display: flex;
             flex-direction: column;
+            margin-bottom: 20px;
         }
 
         .grb-post-header {
@@ -47,28 +48,46 @@
             filter: invert(1);
         }
 
-        .grb-stats {
+        .grb-post-stats {
             display: inline-flex;
             margin: 10px 0 0 0;
             padding: 5px 0 0 0;
             gap: 20px;
             border-top: 1px solid grey;
         }
-        .grb-stats span {
+        .grb-post-stats span {
             display: inline-flex;
             align-items: center;
             gap: 2.5px;
             margin-bottom: 0;
         }
-        .grb-stats span p {
+        .grb-post-stats span p {
             margin: 0;
         }
-        /* .grb-stats .grb-likes {
+        
+        .grb-post-info {
             display: inline-flex;
+            align-items: center;
+            gap: 2.5px;
         }
-        .grb-stats .grb-shares {
-            display: inline-flex;
-        } */
+        .grb-post-details p {
+            margin: 0;
+        }
+        .grb-post-details p:last-child {
+            color: rgba(200, 200, 200, .75);
+            font-size: .9em;
+        }
+
+        .grb-post-edited-timestamp {
+            color: rgba(200, 200, 200, .75);
+            font-size: .9em;
+            margin: 5px 0 0 0;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
     </style>
     <p>hello</p>
     <div id="blog-posts"></div>
