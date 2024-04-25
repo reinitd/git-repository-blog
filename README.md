@@ -2,6 +2,12 @@
 
 ### Not Done!
 
+## How does this work?
+
+The script fetches data from a GitHub repo: the blog posts, comments, shares, likes, etc. The user authenticates with GitHub (GitLab and BitBucket coming soon) to interact with the blog (likes, shares, posts, comments, etc.). It's terrible for SEO, but turns a statically hosted site, such as a site hosted with GitHub pages, into a dynamic blog site.
+
+## Instructions
+
 Create a `blogconfig.json` file in the site's root directory:
 ```json
 {
@@ -56,6 +62,8 @@ Add the JS:
 ```
 
 ### To-do
+- [ ] Report function
+- [ ] User profile
 - [ ] Make a builder for document elements.
 - [ ] Authenticate with GitHub to allow for administrative/member actions.
 - [ ] Add support for GitLab and (maybe) Bitbucket.
