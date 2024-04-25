@@ -64,7 +64,7 @@ function defaultLoadPosts(parentElementId) {
         headerSpan.classList.add('grb-post-header');
 
         var titleLink = document.createElement('a');
-        titleLink.href = post.titleLink;
+        titleLink.href = post.title_link;
         titleLink.target = "_blank";
         titleLink.classList.add("grb-post-title");
         titleLink.textContent = `${post.author} • ${post.title}`;
@@ -116,8 +116,82 @@ function defaultLoadPosts(parentElementId) {
         shareSpan.appendChild(shareIcon);
         shareSpan.appendChild(shares);
 
-        postStats.appendChild(likeSpan);
-        postStats.appendChild(shareSpan);
+        var interactionsSpan = document.createElement('span');
+        interactionsSpan.classList.add('grb-post-interactions');
+        interactionsSpan.appendChild(likeSpan);
+        interactionsSpan.appendChild(shareSpan);
+
+        if (post.comments.length > 0) {
+            var commentDetails = document.createElement('details');
+            var commentSummary = document.createElement('summary');
+            commentSummary.classList.add('grb-post-summary');
+            commentSummary.textContent = `Click to View Comments (${post.comments.length})`;
+            
+            commentDetails.appendChild(commentSummary);
+
+            // {
+            //     "id": 0,
+            //     "uid": 1234,
+            //     "author": "Comment Author",
+            //     "author_avatar": "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
+            //     "comment_content": "Comment content here.",
+            //     "comment_timestamp": 1713273446,
+            //     "likes": 0
+            // }
+            
+            for (let i = 0; i < post.comments.length; i++) {
+                var commentDiv = document.createElement('div');
+                commentDiv.classList.add('grb-comment');
+
+                var commentHeader = document.createElement('span');
+                commentHeader.classList.add('grb-comment-header');
+                var commentInfo = document.createElement('div');
+                commentInfo.classList.add('grb-comment-info');
+                var commentAuthor = document.createElement('p');
+                commentAuthor.classList.add('grb-comment-title');
+                commentAuthor.textContent = post.comments[i].author;
+                var commentCreation = document.createElement('p');
+                commentCreation.classList.add('grb-comment-creation-date');
+                commentCreation.textContent = unixToNormal(post.comments[i].comment_timestamp);
+
+                var commentContent = document.createElement('p');
+                commentContent.classList.add('grb-comment-content');
+                commentContent.textContent = post.comments[i].comment_content;
+
+                var commentUid = document.createElement('p');
+                commentUid.classList.add('grb-comment-uid');
+                commentUid.textContent = `UID: ${post.comments[i].uid}`;
+
+                var likeSpan = document.createElement('span');
+                likeSpan.classList.add('grb-comment-likes');
+                var likeIcon = document.createElement('i');
+                likeIcon.className = "bx bx-like"; // <i class='bx bx-like'></i>
+                var likes = document.createElement('p');
+                likes.textContent = post.comments[i].likes;
+                likeSpan.appendChild(likeIcon);
+                likeSpan.appendChild(likes);
+
+                commentInfo.appendChild(commentAuthor);
+                commentInfo.appendChild(commentCreation)
+                commentInfo.appendChild(commentUid);
+
+                commentHeader.appendChild(commentInfo);
+                
+                commentDiv.appendChild(commentHeader);
+                commentDiv.appendChild(commentContent);
+                commentDiv.appendChild(likeSpan);
+
+
+                commentDetails.appendChild(commentDiv);
+            }
+
+            // var commentTextNode = document.createTextNode('Comments here.');
+            // commentDetails.appendChild(commentTextNode);
+        
+            postStats.appendChild(commentDetails);
+        }
+
+        postStats.append(interactionsSpan);
 
         headerSpan.appendChild(postInfoDiv);
         headerSpan.appendChild(uidPortion);
@@ -138,21 +212,7 @@ function defaultLoadPosts(parentElementId) {
             parentElement.prepend(postDiv);
         } else {
             parentElement.appendChild(postDiv);
-        }
-
-        if (post.comments.length > 0) {
-            var commentDetails = document.createElement('details');
-            var commentSummary = document.createElement('summary');
-            commentSummary.classList.add('grb-post-summary');
-            commentSummary.textContent = 'Click to View Comments';
-            
-            commentDetails.appendChild(commentSummary);
-            
-            var commentTextNode = document.createTextNode('Comments here.');
-            commentDetails.appendChild(commentTextNode);
-        
-            postDiv.appendChild(commentDetails);
-        }        
+        }       
 
         var timeTaken = Date.now() - start;
         console.log("Posts loaded in: " + timeTaken + " milliseconds");
