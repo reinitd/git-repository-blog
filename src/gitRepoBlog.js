@@ -223,8 +223,9 @@ function defaultLoadPosts(parentElementId) {
 async function startGRB() {
     const configResponse = await fetch("./blogconfig.json");
     config = await configResponse.json();
+    let host = config.repository.host.toString().toLowerCase();
     console.log(config);
-    switch (config.repository.host.toString().toLowerCase()) {
+    switch (host) {
         case "github":
             // https://raw.githubusercontent.com/The-Holy-Church-of-Terry-Davis/The-Holy-Church-of-Terry-Davis.github.io/main/js/loadposts.js
             let base = `https://raw.githubusercontent.com/${config.repository.repository}/${config.repository.branch}`;
@@ -241,6 +242,20 @@ async function startGRB() {
             return;
     }
     await getData(postData_url);
+    var authNoticeDiv = document.createElement('div');
+    authNoticeDiv.classList.add('grb-auth-notice');
+    
+    var authNoticeMessage = document.createElement('p');
+    authNoticeMessage.classList.add('grb-auth-notice-message');
+    authNoticeMessage.textContent = `Please authenticate with ${host.toUpperCase()} inorder to interact with blog posts and comments.`;
+
+    var authNoticeButton = document.createElement('button');
+    authNoticeButton.classList.add('grb-auth-notice-button');
+    authNoticeButton.textContent = "Authenticate";
+
+    authNoticeDiv.appendChild(authNoticeMessage);
+    authNoticeDiv.appendChild(authNoticeButton);
+    document.body.prepend(authNoticeDiv);
 }
 
 (async () => {

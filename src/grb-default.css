@@ -12,6 +12,22 @@
     background: -o-linear-gradient(top, white, black);
     background: linear-gradient(to bottom, white, black);
 }
+
+.grb-auth-notice {
+    margin-bottom: 20px;
+}
+.grb-auth-notice-button {
+    color: white;
+    background-color: rgb(50, 150, 50);
+    border: none;
+    padding: 2.5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.grb-auth-notice-button:hover {
+    opacity: .7;
+}
+
 .grb-post {
     border: 1px solid grey;
     border-radius: 5px;
