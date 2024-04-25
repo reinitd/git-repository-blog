@@ -16,7 +16,7 @@ Create a `blogconfig.json` file in the site's root directory:
 }
 ```
 
-Create a 'posts.json' file anywhere in a publicly accessible place in the project directory. You can leave this blank, here is an example of what it will look like:
+Create a `posts.json` file anywhere in a publicly accessible place in the project directory, it's recommended that you create a new repository just for the blog's data, so other users wont have access to the site's main repository. You can leave this blank, here is an example of what it will look like:
 ```json
 {
   "last_updated_timestamp": 1713358687,
