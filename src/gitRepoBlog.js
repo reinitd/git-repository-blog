@@ -59,6 +59,7 @@ function defaultLoadPosts(parentElementId) {
         var post = postData[i];
         var postDiv = document.createElement('div');
         postDiv.classList.add('grb-post');
+        postDiv.id = `post-uid-${post.uid}`;
 
         var headerSpan = document.createElement('span');
         headerSpan.classList.add('grb-post-header');
@@ -123,25 +124,32 @@ function defaultLoadPosts(parentElementId) {
 
         if (post.comments.length > 0) {
             var commentDetails = document.createElement('details');
+            commentDetails.classList.add('grb-post-comment-details');
             var commentSummary = document.createElement('summary');
             commentSummary.classList.add('grb-post-summary');
             commentSummary.textContent = `Click to View Comments (${post.comments.length})`;
             
             commentDetails.appendChild(commentSummary);
 
-            // {
-            //     "id": 0,
-            //     "uid": 1234,
-            //     "author": "Comment Author",
-            //     "author_avatar": "https://cdn-icons-png.flaticon.com/512/1077/1077114.png",
-            //     "comment_content": "Comment content here.",
-            //     "comment_timestamp": 1713273446,
-            //     "likes": 0
-            // }
+            var writeCommentDiv = document.createElement('div');
+            writeCommentDiv.classList.add('grb-comment-write-comment');
+
+            var commentTextArea = document.createElement('textarea');
+            commentTextArea.classList.add('grb-comment-write-comment-textarea');
+            commentTextArea.setAttribute('placeholder', 'Write your comment here.');
+
+            var postCommentButton = document.createElement('button');
+            postCommentButton.classList.add('grb-comment-write-comment-post-comment-button');
+            postCommentButton.textContent = 'Post';
+
+            writeCommentDiv.appendChild(commentTextArea);
+            writeCommentDiv.appendChild(postCommentButton);
+            commentDetails.appendChild(writeCommentDiv);
             
             for (let i = 0; i < post.comments.length; i++) {
                 var commentDiv = document.createElement('div');
                 commentDiv.classList.add('grb-comment');
+                commentDiv.id = `comment-uid-${post.comments[i].uid}`;
 
                 var commentHeader = document.createElement('span');
                 commentHeader.classList.add('grb-comment-header');
@@ -184,9 +192,6 @@ function defaultLoadPosts(parentElementId) {
 
                 commentDetails.appendChild(commentDiv);
             }
-
-            // var commentTextNode = document.createTextNode('Comments here.');
-            // commentDetails.appendChild(commentTextNode);
         
             postStats.appendChild(commentDetails);
         }

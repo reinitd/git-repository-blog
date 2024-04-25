@@ -13,19 +13,59 @@
     background: linear-gradient(to bottom, white, black);
 }
 
+button {
+    border: none;
+    padding: 2.5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+button:hover {
+    opacity: .7;
+}
+
+.grb-post-comment-details {
+    flex-grow: 1;
+}
+
 .grb-auth-notice {
     margin-bottom: 20px;
 }
 .grb-auth-notice-button {
     color: white;
     background-color: rgb(50, 150, 50);
-    border: none;
-    padding: 2.5px 5px;
-    cursor: pointer;
-    border-radius: 5px;
 }
-.grb-auth-notice-button:hover {
-    opacity: .7;
+
+.grb-comment-write-comment {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.grb-comment-write-comment-textarea {
+    resize: vertical;
+    border-radius: 5px 5px 2px 2px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid grey;
+    flex-grow: 1;
+    font-size: large;
+    padding: 5px;
+}
+.grb-comment-write-comment-textarea:focus {
+    outline: 1px solid white;
+}
+
+.grb-comment-write-comment-post-comment-button {
+    color: white;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 2px 2px 5px 5px;
+    font-size: medium;
+}
+.grb-comment-write-comment-post-comment-button:hover {
+    opacity: 1;
+    background-color: rgb(30, 30, 30);
 }
 
 .grb-post {
