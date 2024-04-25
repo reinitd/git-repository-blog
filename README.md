@@ -22,7 +22,9 @@ Create a `blogconfig.json` file in the site's root directory:
 }
 ```
 
-Create a `posts.json` file anywhere in a publicly accessible place in the project directory, it's recommended that you create a new repository just for the blog's data, so other users wont have access to the site's main repository. You can leave this blank, here is an example of what it will look like:
+Create a `posts.json` file anywhere in a publicly accessible place in the project directory, it's recommended that you create a new repository just for the blog's data, so other users wont have access to the site's main repository.
+
+You can leave the initial file blank unless you want to manually add data, here is an example of what it will look like once you create a blog post:
 ```json
 {
   "last_updated_timestamp": 1713358687,
@@ -66,5 +68,4 @@ Add the JS:
 - [ ] User profile
 - [ ] Make a builder for document elements.
 - [ ] Authenticate with GitHub to allow for administrative/member actions.
-- [ ] Add support for GitLab and (maybe) Bitbucket.
-- [ ] Add support for GitLab instances (subdomains).
+- [ ] Add support for GitLab, GitLab instances, and (maybe) Bitbucket. Also add host "custom" where the user puts the link to the repository in the "repository" field. Somehow figure out a way to authenticate like that.
