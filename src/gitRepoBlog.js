@@ -246,7 +246,6 @@ async function startGRB() {
             console.log(`Host '${host}' is not supported.`);
             return;
     }
-    await getData(postData_url);
     var authNoticeDiv = document.createElement('div');
     authNoticeDiv.classList.add('grb-auth-notice');
     
