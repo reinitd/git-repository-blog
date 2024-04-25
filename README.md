@@ -64,6 +64,7 @@ Add the JS:
 ```
 
 ### To-do
+- [ ] **CLEAN-UP CODE !!**
 - [ ] Report function
 - [ ] User profile
 - [ ] Make a builder for document elements.
