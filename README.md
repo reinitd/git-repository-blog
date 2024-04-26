@@ -65,6 +65,7 @@ Add the JS:
 
 ### To-do
 - [ ] **CLEAN-UP CODE !!**
+- [ ] For default styling, add a "read time."
 - [ ] Auth type on `blogconfig.json` for GitHub PAT or auth with a GH app.
 - [ ] Report function
 - [ ] User profile
