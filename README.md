@@ -65,6 +65,7 @@ Add the JS:
 
 ### To-do
 - [ ] **CLEAN-UP CODE !!**
+- [ ] Auth type on `blogconfig.json` for GitHub PAT or auth with a GH app.
 - [ ] Report function
 - [ ] User profile
 - [ ] Make a builder for document elements.
